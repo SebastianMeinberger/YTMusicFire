@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=0.1
+Name=YTmusic Fire
+GenericName=YouTube Music
+Keywords=Music;Media;YouTube;yt
+Exec=/usr/lib/firefox/firefox --new-window https://music.youtube.com --profile /usr/share/ytmusicfire/YTMusicFireUser
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=AudioVideo;Player;Audio;

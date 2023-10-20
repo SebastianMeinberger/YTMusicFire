@@ -10,7 +10,7 @@ fetch_extensions:
 
 .PHONY: activate_extensions
 activate_extensions: $(DESTDIR)
-	# First let firefox create all profile data. This is unfortunatly not done in CreateProfile but only on first startup
+	# First let firefox create all profile data. This is unfortunatly not done in CreateProfile but only on first startup. But the upside is, that this will disable the firefox post-install instructions, since the profile was already used one time after this runs.
 	/bin/bash WaitForFfFiles.sh $(DESTDIR) $(PREFIX) 
 	# Set active true for uBlock
 	jq '.addons |= map (select(.id == "uBlock0@raymondhill.net").active |= true)' $(DESTDIR)$(PREFIX)extensions.json > tmp
@@ -24,9 +24,11 @@ activate_extensions: $(DESTDIR)
 install: $(DESTDIR)
 	install -d $(DESTDIR)/usr/share/$(PKGNAME)
 #	Profile creation
-	firefox -CreateProfile "$(PROFILE_USERNAME) $(DESTDIR)/usr/share/$(PKGNAME)/$(PROFILE_USERNAME)"
+	firefox -CreateProfile "$(PROFILE_USERNAME) $(DESTDIR)$(PREFIX)"
 #	Hide URL bar and navbar
-	install -D userChrome.css $(DESTDIR)/usr/share/$(PKGNAME)/$(PROFILE_USERNAME)/chrome/userChrome.css
-	install user.js $(DESTDIR)/usr/share/$(PKGNAME)/$(PROFILE_USERNAME)/user.js
+	install -D userChrome.css $(DESTDIR)$(PREFIX)chrome/userChrome.css
+	install user.js $(DESTDIR)$(PREFIX)user.js
 #	Install extensions
-	install -D extensions/uBlock.xpi $(DESTDIR)/usr/share/$(PKGNAME)/$(PROFILE_USERNAME)/extensions/uBlock0@raymondhill.net.xpi
+	install -D extensions/uBlock.xpi $(DESTDIR)$(PREFIX)extensions/uBlock0@raymondhill.net.xpi
+#	Install desktop entry
+	install -D ytmusic.desktop $(DESTDIR)/usr/share/applications/ytmusic.desktop
