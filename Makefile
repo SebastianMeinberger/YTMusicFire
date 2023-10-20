@@ -10,6 +10,8 @@ fetch_extensions:
 
 .PHONY: activate_extensions
 activate_extensions: $(DESTDIR)
+	# First let firefox create all profile data. This is unfortunatly not done in CreateProfile but only on first startup
+	/bin/bash WaitForFfFiles.sh $(DESTDIR) $(PREFIX) 
 	# Set active true for uBlock
 	jq '.addons |= map (select(.id == "uBlock0@raymondhill.net").active |= true)' $(DESTDIR)$(PREFIX)extensions.json > tmp
 	# Set userDisabled false for uBlock
