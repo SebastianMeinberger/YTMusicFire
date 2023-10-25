@@ -1,0 +1,70 @@
+{
+  \"chapterCategoryAdded\": true,
+  \"autoSkipOnMusicVideosUpdate\": true,
+  \"invidiousInstances\": [
+    \"www.youtubekids.com\",
+    \"anontube.lvkaszus.pl\",
+    \"inv.bp.projectsegfau.lt\",
+    \"inv.makerlab.tech\",
+    \"inv.pistasjis.net\",
+    \"inv.tux.pizza\",
+    \"inv.zzls.xyz\",
+    \"invidious.asir.dev\",
+    \"invidious.flokinet.to\",
+    \"invidious.io.lol\",
+    \"invidious.lunar.icu\",
+    \"invidious.no-logs.com\",
+    \"invidious.privacydev.net\",
+    \"invidious.private.coffee\",
+    \"invidious.protokolla.fi\",
+    \"invidious.slipfox.xyz\",
+    \"invidious.tiekoetter.com\",
+    \"iv.ggtyler.dev\",
+    \"iv.melmac.space\",
+    \"iv.nboeck.de\",
+    \"onion.tube\",
+    \"vid.priv.au\",
+    \"vid.puffyan.us\",
+    \"yewtu.be\",
+    \"yt.artemislena.eu\",
+    \"yt.drgnz.club\",
+    \"yt.oelrichsgarcia.de\",
+    \"invidious.snopyta.org\"
+  ],
+  \"categorySelections\": [
+    {
+      \"name\": \"sponsor\",
+      \"option\": 2
+    },
+    {
+      \"name\": \"poi_highlight\",
+      \"option\": 1
+    },
+    {
+      \"name\": \"exclusive_access\",
+      \"option\": 0
+    },
+    {
+      \"name\": \"chapter\",
+      \"option\": 0
+    },
+    {
+      \"name\": \"music_offtopic\",
+      \"option\": 2
+    }
+  ],
+  \"isVip\": false,
+  \"permissions\": {
+    \"sponsor\": true,
+    \"selfpromo\": true,
+    \"exclusive_access\": true,
+    \"interaction\": true,
+    \"intro\": true,
+    \"outro\": true,
+    \"preview\": true,
+    \"music_offtopic\": true,
+    \"filler\": true,
+    \"poi_highlight\": true,
+    \"chapter\": false
+  }
+}

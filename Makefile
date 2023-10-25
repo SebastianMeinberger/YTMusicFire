@@ -27,9 +27,13 @@ $(addprefix install_, $(EXTENSIONS)): install_%: extensions/$$(call EXTENSIONS_N
 create_profile: $(addprefix install_,$(EXTENSIONS))
 	/bin/bash WaitForFfFiles.sh $(DESTDIR) $(PREFIX)
 
-# Set the neccesary vars in extension.json and addonStartup.json.lz4
+# Set the standard configuration for sponsorblock. This is meant to enable autoskip on non music segments, but by changing the sponsorblock_default_conf.json you can setup any default conf.
+activate_sponsorblock+sponsorBlocker@ajay.app:: create_profile
+	sqlite3 $(DESTDIR)$(PREFIX)storage-sync-v2.sqlite "INSERT INTO storage_sync_data VALUES('sponsorBlocker@ajay.app','$(shell cat sponsorblock_default_conf.json)',0)"
+
+# Set the neccesary vars in extension.json and addonStartup.json.lz4. Note that this rule is a double colon rule. When adding an additional double colon rule for a specific extension, the recepies of both are executed for that extension.
 .PHONY: $(addprefix activate_, $(EXTENSIONS))
-$(addprefix activate_, $(EXTENSIONS)): activate_%: create_profile
+$(addprefix activate_, $(EXTENSIONS)):: activate_%: create_profile
 	# Set active true
 	jq '.addons |= map (select(.id == "$(call EXTENSIONS_ID, $*)").active |= true)' $(DESTDIR)$(PREFIX)extensions.json > $*_tmp
 	# Set userDisabled false
@@ -38,7 +42,6 @@ $(addprefix activate_, $(EXTENSIONS)): activate_%: create_profile
 	python3 mozlz4a.py -d $(DESTDIR)$(PREFIX)addonStartup.json.lz4 | jq '."app-profile".addons."$(call EXTENSIONS_ID, $*)".enabled |= true' > $*_tmp
 	python3 mozlz4a.py $*_tmp > $(DESTDIR)$(PREFIX)addonStartup.json.lz4
 	rm $*_tmp
-
 
 .PHONY: install
 install: $(DESTDIR) $(addprefix activate_,$(EXTENSIONS))
