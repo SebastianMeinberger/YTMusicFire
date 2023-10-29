@@ -46,8 +46,8 @@ $(addprefix activate_, $(EXTENSIONS)):: activate_%: create_profile
 .PHONY: install
 install: $(DESTDIR) $(addprefix activate_,$(EXTENSIONS))
 	# Install files for hiding URL- and navbar
-	install -Dm 660 userChrome.css $(DESTDIR)$(PREFIX)chrome/userChrome.css
-	install -m 770 user.js $(DESTDIR)$(PREFIX)user.js
+	install -Dm 664 userChrome.css $(DESTDIR)$(PREFIX)chrome/userChrome.css
+	install -m 774 user.js $(DESTDIR)$(PREFIX)user.js
 	# Install executable and desktop entry
-	install -m 733 ytmusicfire $(DESTDIR)/usr/bin/ytmusicfire
-	install -m 733 ytmusicfire.desktop $(DESTDIR)/usr/share/applications/ytmusic.desktop
+	install -m 755 ytmusicfire $(DESTDIR)/usr/bin/ytmusicfire
+	install -m 644 ytmusicfire.desktop $(DESTDIR)/usr/share/applications/ytmusicfire.desktop
