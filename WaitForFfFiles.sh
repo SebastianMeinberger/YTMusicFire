@@ -1,5 +1,5 @@
 #!/bin/bash
-firefox --headless --new-instance --profile test/usr/share/ytmusicfire/YTMusicFireUser &
+firefox --headless --new-instance --profile $1$2 &
 until [ -f $1$2extensions.json ] && [ -f $1$2addonStartup.json.lz4 ]
 do
 	sleep 1
