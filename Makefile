@@ -50,4 +50,4 @@ install: $(DESTDIR) $(addprefix activate_,$(EXTENSIONS))
 	install -m 770 user.js $(DESTDIR)$(PREFIX)user.js
 	# Install executable and desktop entry
 	install -m 733 ytmusicfire $(DESTDIR)/usr/bin/ytmusicfire
-	install -m 733 ytmusic.desktop $(DESTDIR)/usr/share/applications/ytmusic.desktop
+	install -m 733 ytmusicfire.desktop $(DESTDIR)/usr/share/applications/ytmusic.desktop
