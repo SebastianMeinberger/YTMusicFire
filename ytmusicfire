@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Copy the firefox profile to the users .conf if no conf folder exists for ytmusicfire.
+# Technically the profile doesn't really belong to .conf, but would need its own dot file (just like mozilla does it with ~/.mozilla/firefox), but in my experience most people prefere to not have there home directory clutterd with endless dotfiles and expect random applications to keep there user dependent stuff in .conf/<name>/ .
+# But if this subjective opinion does not represent the majority, this might be changed to ~/.ytmusicfire .
+if [ ! -d ~/.config/ytmusicfire ]; then
+	install -d ~/.config/ytmusicfire/
+	cp -R /usr/share/ytmusicfire/YTMusicFireUser/ ~/.config/ytmusicfire/YTMusicFireUser/
+fi
+
+if [ ! -d ~/.config/ytmusicfire/YTMusicFireUser ]; then
+	YTMUSICFIREPROFILE=/usr/share/ytmusicfire/YTMusicFireUser
+else
+	YTMUSICFIREPROFILE=~/.config/ytmusicfire/YTMusicFireUser
+fi
+
+firefox --new-window https://music.youtube.com --profile $YTMUSICFIREPROFILE --new-instance

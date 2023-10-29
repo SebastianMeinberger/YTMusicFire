@@ -2,7 +2,7 @@ PKGNAME := ytmusicfire
 PROFILE_USERNAME := YTMusicFireUser
 PREFIX = /usr/share/$(PKGNAME)/$(PROFILE_USERNAME)/
 
-# To add more extensions on install, add <extension-name>+<extension-id> to this string. The id can be found in the manifest.
+# To add more extensions on install, add <extension-name>+<extension-id> to this string. The correct writing of the name can be found in the url of the corresponding mozilla addon page and the id can be found in the manifest (Which can be found in the xpi file. These are basically just jars).
 EXTENSIONS := ublock-origin+uBlock0@raymondhill.net sponsorblock+sponsorBlocker@ajay.app
 define EXTENSIONS_NAME
 $(firstword $(subst +, ,$(1)))
@@ -45,8 +45,9 @@ $(addprefix activate_, $(EXTENSIONS)):: activate_%: create_profile
 
 .PHONY: install
 install: $(DESTDIR) $(addprefix activate_,$(EXTENSIONS))
-	# Hide URL bar and navbar
-	install -D userChrome.css $(DESTDIR)$(PREFIX)chrome/userChrome.css
-	install user.js $(DESTDIR)$(PREFIX)user.js
-	# Install desktop entry
-	install -D ytmusic.desktop $(DESTDIR)/usr/share/applications/ytmusic.desktop
+	# Install files for hiding URL- and navbar
+	install -Dm 660 userChrome.css $(DESTDIR)$(PREFIX)chrome/userChrome.css
+	install -m 770 user.js $(DESTDIR)$(PREFIX)user.js
+	# Install executable and desktop entry
+	install -m 733 ytmusicfire $(DESTDIR)/usr/bin/ytmusicfire
+	install -m 733 ytmusic.desktop $(DESTDIR)/usr/share/applications/ytmusic.desktop
